@@ -1,0 +1,90 @@
+.header {
+  min-height: 80px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+
+  &__user-info {
+    display: flex;
+    gap: 13px;
+  }
+
+  &__profile-name {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .edit-profile_img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+  }
+
+  &__btn {
+    display: flex;
+    min-width: 84px;
+    height: 35px;
+    border: none;
+    background: none;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    &:hover {
+      cursor: pointer;
+    }
+    &_sign-up {
+      border: 1px solid #52c41a;
+      color: #52c41a;
+      border-radius: 5px;
+      transition: 0.2s linear;
+      &:hover {
+        color: #ffffff;
+        background: #52c41a;
+      }
+    }
+    &_create-article {
+      border: 1px solid #52c41a;
+      color: #52c41a;
+      border-radius: 5px;
+      transition: 0.2s linear;
+      padding: 6px 10px;
+      width: auto;
+      &:hover {
+        color: #ffffff;
+        background: #52c41a;
+      }
+    }
+    &_log-out {
+      border: 1px solid #000000;
+      border-radius: 5px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__logo {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.85);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

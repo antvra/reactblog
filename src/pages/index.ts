@@ -1,0 +1,6 @@
+export { PostItemPage } from './PostItemPage'
+export { PostListPage } from './PostListPage'
+export { SignInPage } from './SignInPage'
+export { SignUpPage } from './SignUpPage'
+export { NotFoundPage } from './NotFoundPage'
+export { EditProfilePage } from './EditProfilePage'

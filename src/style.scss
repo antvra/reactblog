@@ -1,0 +1,45 @@
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  font-weight: normal;
+}
+
+a {
+  width: auto;
+}
+
+body {
+  background: #ebeef3;
+  margin: 0;
+  min-width: 475px;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.load {
+  display: flex;
+  justify-content: center;
+}
