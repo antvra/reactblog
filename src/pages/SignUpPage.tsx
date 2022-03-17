@@ -1,12 +1,17 @@
+import { useState } from 'react'
+
 import { SignUpForm } from '../components/SignUpForm'
 import { useRegisterNewUserMutation } from '../store/API'
 
 export const SignUpPage = () => {
-  const [registerNewUser, { data, error: serverErrors }] =
-    useRegisterNewUserMutation()
+  const [serverErrors, changeServerErrors] = useState(null)
+
+  const [registerNewUser, { data }] = useRegisterNewUserMutation()
 
   const handleSubmit = (userData: object) => {
-    registerNewUser(userData).unwrap()
+    registerNewUser(userData)
+      .unwrap()
+      .catch((err) => changeServerErrors(err))
   }
   return (
     <SignUpForm

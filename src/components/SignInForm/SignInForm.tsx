@@ -3,9 +3,14 @@ import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './SignInForm.scss'
 
+interface IServerErrors {
+  status: number | null
+  data: object
+}
+
 interface IProps {
   handleSubmit: (userData: object) => void
-  serverErrors: any
+  serverErrors: IServerErrors | null
   success: boolean
 }
 

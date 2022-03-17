@@ -4,9 +4,19 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import './SignUpForm.scss'
 
+interface IServerErrors {
+  status: number | null
+  data: {
+    errors: {
+      username: string
+      email: string
+    }
+  }
+}
+
 interface IProps {
   handleSubmit: (userData: object) => void
-  serverErrors: any
+  serverErrors: IServerErrors | null
   success: boolean
 }
 
@@ -15,16 +25,18 @@ const SignUpForm = ({ serverErrors, handleSubmit, success }: IProps) => {
   const [form] = Form.useForm()
 
   useEffect(() => {
-    if (serverErrors?.data.errors.username) {
-      form.setFields([
-        { name: 'username', errors: [`${serverErrors.data.errors.username}`] }
-      ])
-    }
+    if (serverErrors) {
+      if (serverErrors.data.errors.username) {
+        form.setFields([
+          { name: 'username', errors: [`${serverErrors.data.errors.username}`] }
+        ])
+      }
 
-    if (serverErrors?.data.errors.email) {
-      form.setFields([
-        { name: 'email', errors: [`${serverErrors.data.errors.email}`] }
-      ])
+      if (serverErrors.data.errors.email) {
+        form.setFields([
+          { name: 'email', errors: [`${serverErrors.data.errors.email}`] }
+        ])
+      }
     }
   }, [serverErrors, form])
 

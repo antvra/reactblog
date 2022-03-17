@@ -1,17 +1,20 @@
 import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { setUser } from '../store/slices/userSlice'
 import { SignInForm } from '../components/SignInForm'
 import { useLoginExistingUserMutation } from '../store/API'
 
 export const SignInPage = () => {
-  const [loginExistingUser, { data, error: serverErrors }] =
-    useLoginExistingUserMutation()
+  const [serverErrors, changeServerErrors] = useState(null)
+
+  const [loginExistingUser, { data }] = useLoginExistingUserMutation()
   const dispatch = useDispatch()
 
   const handleSubmit = (userData: object) => {
-    loginExistingUser(userData).unwrap()
+    loginExistingUser(userData)
+      .unwrap()
+      .catch((err) => changeServerErrors(err))
   }
 
   useEffect(() => {
@@ -24,6 +27,7 @@ export const SignInPage = () => {
           image: data.user.image
         })
       )
+      localStorage.setItem('session-info', JSON.stringify(data))
     }
   }, [data, dispatch])
 

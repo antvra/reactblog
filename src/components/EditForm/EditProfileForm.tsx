@@ -6,6 +6,16 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import './EditProfileForm.scss'
 
+interface IServerErrors {
+  status: number | null
+  data: {
+    errors: {
+      username: string
+      email: string
+    }
+  }
+}
+
 interface IUserData {
   username: string
   image: string
@@ -15,7 +25,7 @@ interface IUserData {
 
 interface IProps {
   handleSubmit: (userData: IUserData) => void
-  serverErrors: any
+  serverErrors: IServerErrors | null
   success: boolean
 }
 
@@ -46,16 +56,18 @@ const EditProfileForm = ({ handleSubmit, serverErrors, success }: IProps) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (serverErrors?.data.errors.username) {
-      form.setFields([
-        { name: 'username', errors: [`${serverErrors.data.errors.username}`] }
-      ])
-    }
+    if (serverErrors) {
+      if (serverErrors.data.errors.username) {
+        form.setFields([
+          { name: 'username', errors: [`${serverErrors.data.errors.username}`] }
+        ])
+      }
 
-    if (serverErrors?.data.errors.email) {
-      form.setFields([
-        { name: 'email', errors: [`${serverErrors.data.errors.email}`] }
-      ])
+      if (serverErrors.data.errors.email) {
+        form.setFields([
+          { name: 'email', errors: [`${serverErrors.data.errors.email}`] }
+        ])
+      }
     }
   }, [serverErrors, form])
 

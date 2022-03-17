@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { EditProfileForm } from '../components/EditForm'
@@ -15,7 +15,8 @@ interface IUserData {
 }
 
 export const EditProfilePage = () => {
-  const [editProfile, { data, error: serverErrors }] = useEditProfileMutation()
+  const [serverErrors, changeServerErrors] = useState(null)
+  const [editProfile, { data }] = useEditProfileMutation()
   const { token, username, image, email } = useAuth()
   const dispatch = useDispatch()
 
@@ -28,7 +29,9 @@ export const EditProfilePage = () => {
     ) {
       message.warning('Вы ничего не изменили.')
     } else {
-      editProfile({ userData, token }).unwrap()
+      editProfile({ userData, token })
+        .unwrap()
+        .catch((err) => changeServerErrors(err))
     }
   }
 
